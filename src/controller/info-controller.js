@@ -1,6 +1,7 @@
-const {statuscode}=require('http-status-code')
+const {StatusCodes}=require('http-status-codes')
+
 const info=(req,res)=>{
-    return res.status(200).json({
+    return res.status(StatusCodes.OK).json({
         success:true,
         message:'Api is live',
         data:{},
