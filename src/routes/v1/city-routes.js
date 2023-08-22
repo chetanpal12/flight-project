@@ -1,10 +1,10 @@
 const express=require('express');
 
 const {CityController}=require('../../controller')
-const {AirplaneMiddlewares}=require('../../middleware')
+const {CityMiddlewares}=require('../../middleware')
 const router=express.Router()
 // /api/v1/cities POST
-router.post('/',CityController.createCity);
+router.post('/',CityMiddlewares.validateCreateRequest,CityController.createCity);
 
 
 
