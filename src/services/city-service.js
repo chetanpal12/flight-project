@@ -34,8 +34,20 @@ async function updateCity(data, id){
     }
 }
 
+async function destroyCity(id){
+    try {
+        const responce=await cityRepository.destroy(id);
+        return responce;
+    } catch (error) {
+        if(error.statusCode==StatusCodes.NOT_FOUND){
+            throw new AppError('The city you requested to delete is not present',error.statusCode)
+        }
+        throw new AppError('Cannot fetch data of all the cities', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
 
 module.exports={
     createCity,
-    updateCity
+    updateCity,
+    destroyCity
 }
