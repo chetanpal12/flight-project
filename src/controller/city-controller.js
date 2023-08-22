@@ -58,7 +58,7 @@ async function destroyCity(req,res){
 }
 
 /**
- * POST: /cities/
+ * GET: /cities/
  * req-body {}
  */
 async function getCities(req,res){
@@ -74,9 +74,27 @@ async function getCities(req,res){
 }
 
 
+/**
+ * Get: /cities/:id
+ * req-body {}
+ */
+async function getCity(req,res){
+    try {
+        const city=await CityService.getCity(req.params.id);
+        SuccessResponce.data=city;
+        return res.status(StatusCodes.OK).json({SuccessResponce});
+    } catch (error) {
+        ErrorResponce.error=error;
+        console.log(error)
+        return res.status(error.statusCode).json({ErrorResponce});
+    }
+}
+
+
 module.exports={
     createCity,
     updateCity,
     destroyCity,
-    getCities
+    getCities,
+    getCity
 }

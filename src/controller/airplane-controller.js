@@ -4,7 +4,7 @@ const {ErrorResponce,SuccessResponce}=require('../utils/common')
 
 
 /**
- * POST: /airplane
+ * Post: /airplane
  * req-body {modelNumber:'airbus320',capacity:200}
  */
 async function createAirplane(req,res){
@@ -23,7 +23,7 @@ async function createAirplane(req,res){
     }
 }
 /**
- * POST: /airplanes/
+ * GET: /airplanes/
  * req-body {}
  */
 async function getAirplanes(req,res){
@@ -39,7 +39,7 @@ async function getAirplanes(req,res){
 }
 
 /**
- * POST: /airplanes/:id
+ * Get: /airplanes/:id
  * req-body {}
  */
 async function getAirplane(req,res){
