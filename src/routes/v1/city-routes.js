@@ -12,4 +12,7 @@ router.patch('/:id',CityController.updateCity);
 // /api/v1/cities/:id DELETE
 router.delete('/:id',CityController.destroyCity);
 
+// /api/v1/cities GET
+router.get('/',CityController.getCities);
+
 module.exports=router;
