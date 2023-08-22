@@ -22,8 +22,27 @@ async function createCity(req,res){
     }
 }
 
+/**
+ * PATCH: /cities/:id
+ * req-body {name: 'London'}
+ */
+async function updateCity(req,res){
+    try {
+        const city= await CityService.updateCity({
+            name:req.body.name
+        },req.params.id);
+        SuccessResponce.data=city;
+        return res.status(StatusCodes.CREATED).json({SuccessResponce})
+        
+    } catch (error) {
+        ErrorResponce.error=error;
+        console.log(error)
+        return res.status(error.statusCode).json({ErrorResponce});
+    }
+}
 
 
 module.exports={
-    createCity
+    createCity,
+    updateCity
 }

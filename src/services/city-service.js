@@ -22,7 +22,20 @@ async function createCity(data){
     }
 }
 
+async function updateCity(data, id){
+    try {
+        const responce=await cityRepository.update(data,id);
+        return responce;
+    } catch (error) {
+        if(error.statusCode==StatusCodes.NOT_FOUND||error.name=='SequelizeUniqueConstraintError'){
+            throw new AppError('The city you requested to update is not present',error.statusCode)
+        }
+        throw new AppError('Cannot update data of  the city', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
 
 module.exports={
-    createCity
+    createCity,
+    updateCity
 }
