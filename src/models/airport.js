@@ -13,8 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.City, {
         foreignKey:'cityId',
-        onDelete:'CASCADE',                            //ONE AIRPORT BELONGS TO ONE CITY
-        onUpdate:'CASCADE'
+        onDelete:'CASCADE'                            //ONE AIRPORT BELONGS TO ONE CITY
       });
     }
   }
