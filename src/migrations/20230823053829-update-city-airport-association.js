@@ -14,7 +14,8 @@ module.exports = {
       name:'city_fkey_constraint',
       fields:['cityId'],
       references:{
-        table:'Cities',
+        table:'Cities',           //when we are adding the contraint in the seperate then we use the table and field
+                                 //  and when we adding in the same then we use model and key     
         field:'id'
       },
       onDelete:'CASCADE'
