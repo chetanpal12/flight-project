@@ -8,6 +8,7 @@ class FlightRepository extends CrudRepository{
         const responce=await Flight.findAll({
             where:filter
         });
+        
         return responce;
     }
 }
