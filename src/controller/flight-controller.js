@@ -40,20 +40,20 @@ async function createFlight(req,res){
     }
 }
 // /**
-//  * GET: /airports/
+//  * GET: /flights/
 //  * req-body {}
 //  */
-// async function getAirports(req,res){
-//     try {
-//         const airports=await AirportService.getAirports();
-//         SuccessResponce.data=airports;
-//         return res.status(StatusCodes.OK).json({SuccessResponce});
-//     } catch (error) {
-//         ErrorResponce.error=error;
-//         console.log(error)
-//         return res.status(error.statusCode).json({ErrorResponce});
-//     }
-// }
+async function getAllFlights(req,res){
+    try {
+        const flight=await FlightService.getAllFlights(req.query);
+        SuccessResponce.data=flight;
+        return res.status(StatusCodes.OK).json({SuccessResponce});
+    } catch (error) {
+        ErrorResponce.error=error;
+        console.log(error)
+        return res.status(error.statusCode).json({ErrorResponce});
+    }
+}
 
 // /**
 //  * Get: /airports/:id
@@ -111,7 +111,7 @@ async function createFlight(req,res){
 
 module.exports={
     createFlight,
-    // getAirports,
+    getAllFlights,
     // getAirport,
     // destroyAirport,
     // updateAirport

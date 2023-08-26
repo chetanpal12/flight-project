@@ -27,14 +27,24 @@ async function createFlight(data){
     
 }
 
-// async function getAirports(){
-//     try {
-//         const airports=await airportRepository.getAll();
-//         return airports;
-//     } catch (error) {
-//         throw new AppError('Cannot fetch data of all the airports', StatusCodes.INTERNAL_SERVER_ERROR);
-//     }
-// }
+async function getAllFlights(query){
+    let customFilter={};
+    // trips:MUM-DEL
+    if(query.trips){
+        [departureAirportId,arrivalAirportId]=query.trips.split("-");
+        customFilter.departureAirportId=departureAirportId;
+        customFilter.arrivalAirportId=arrivalAirportId;
+        if(departureAirportId==arrivalAirportId){
+            throw new AppError('Cannot get Flight because departureAirportId and arrivalAirportId is same',StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+    }
+    try {
+        const flights=await flightRepository.getAllFlights(customFilter);
+        return flights;
+    } catch (error) {
+        throw new AppError('Cannot fetch data of all the flights', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
 
 // async function getAirport(id){
 //     try {
@@ -74,7 +84,7 @@ async function createFlight(data){
 
 module.exports={
     createFlight,
-    // getAirports,
+    getAllFlights,
     // getAirport,
     // destroyAirport,
     // updateAirport
