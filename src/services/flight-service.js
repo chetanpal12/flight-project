@@ -2,6 +2,7 @@ const {FlightRepository}=require('../repositories');
 const AppError=require('../utils/errors/app-error')
 const {StatusCodes}=require('http-status-codes')
 const {compareTime}=require('../utils/helpers/datetime-helper')
+const {Op}=require('sequelize')
 
 const flightRepository= new FlightRepository();
 
@@ -36,6 +37,12 @@ async function getAllFlights(query){
         customFilter.arrivalAirportId=arrivalAirportId;
         if(departureAirportId==arrivalAirportId){
             throw new AppError('Cannot get Flight because departureAirportId and arrivalAirportId is same',StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+    }
+    if(query.price){
+        [minPrice,maxPrice]=query.price.split("-");
+        customFilter.price={
+            [Op.between]:[minPrice,((maxPrice==undefined)?20000:maxPrice)]
         }
     }
     try {
