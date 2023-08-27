@@ -1,5 +1,5 @@
 const CrudRepository=require('./crud-repository')
-const {Flight,Airplane,Airport}=require('../models')
+const {Flight,Airplane,Airport,City}=require('../models')
 const {Sequelize,Op}=require('sequelize');
 class FlightRepository extends CrudRepository{
     constructor(){
@@ -9,11 +9,6 @@ class FlightRepository extends CrudRepository{
         const responce=await Flight.findAll({
             where:filter,
             order:sort,
-            // include:{
-            //     model:Airplane,            //If we write this then it will outer join for innner join you have to do:
-            //     required:true                        //  required:true,
-            // }
-            //we can include in the arrat as well
             include:[
                 {
                     model:Airplane,
@@ -21,17 +16,19 @@ class FlightRepository extends CrudRepository{
                     as:'airplaneDetail'
                 },
                 {
-                    model:Airport,            //if we write only this 2 lines then it will not perform the exact query we want
+                    model:Airport,           
                     required:true,
                     as: 'departureAirport',
                     on:{
                         col:Sequelize.where(Sequelize.col("Flight.departureAirportId"), "=" , Sequelize.col("departureAirport.code"))
-//if you want to aliash then watch vide0 66 implementing seats and starting new services 55:00     
                     },
-
+                    include:{
+                        model:City,
+                        required:true
+                    }
                 },
                 {
-                    model:Airport,            //if we write only this 2 lines then it will not perform the exact query we want
+                    model:Airport,            
                     required:true,
                     as: 'arrivalAirport',
                     on:{
@@ -40,7 +37,6 @@ class FlightRepository extends CrudRepository{
                 }
             ]
         });
-        
         return responce;
     }
 }
