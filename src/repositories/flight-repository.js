@@ -18,14 +18,14 @@ class FlightRepository extends CrudRepository{
                 {
                     model:Airplane,
                     required:true,
-                    as:'airplane_detail'
+                    as:'airplaneDetail'
                 },
                 {
                     model:Airport,            //if we write only this 2 lines then it will not perform the exact query we want
                     required:true,
-                    as: 'departure_airport',
+                    as: 'departureAirport',
                     on:{
-                        col:Sequelize.where(Sequelize.col("Flight.departureAirportId"), "=" , Sequelize.col("departure_airport.code"))
+                        col:Sequelize.where(Sequelize.col("Flight.departureAirportId"), "=" , Sequelize.col("departureAirport.code"))
 //if you want to aliash then watch vide0 66 implementing seats and starting new services 55:00     
                     },
 
@@ -33,9 +33,9 @@ class FlightRepository extends CrudRepository{
                 {
                     model:Airport,            //if we write only this 2 lines then it will not perform the exact query we want
                     required:true,
-                    as: 'arrival_airport',
+                    as: 'arrivalAirport',
                     on:{
-                        col:Sequelize.where(Sequelize.col("Flight.arrivalAirportId"), "=" , Sequelize.col("arrival_airport.code"))
+                        col:Sequelize.where(Sequelize.col("Flight.arrivalAirportId"), "=" , Sequelize.col("arrivalAirport.code"))
                     },
                 }
             ]
