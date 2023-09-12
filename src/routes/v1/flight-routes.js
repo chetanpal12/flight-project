@@ -11,8 +11,8 @@ router.post('/',
 // /api/v1/flights?trips=MUM-DEL       GET
 router.get('/',FlightController.getAllFlights);
 
-// // /api/v1/airports/:id GET
-// router.get('/:id',AirportController.getAirport);
+// /api/v1/airports/:id GET
+router.get('/:id',FlightController.getFlight);
 
 // // /api/v1/airports/:id DELETE
 // router.delete('/:id',AirportController.destroyAirport);

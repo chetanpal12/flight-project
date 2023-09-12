@@ -75,17 +75,17 @@ async function getAllFlights(query){
     }
 }
 
-// async function getAirport(id){
-//     try {
-//         const airport=await airportRepository.get(id);
-//         return airport;
-//     } catch (error) {
-//         if(error.statusCode==StatusCodes.NOT_FOUND){
-//             throw new AppError('The Airport you requested is not present',error.statusCode)
-//         }
-//         throw new AppError('Cannot fetch data of the airport', StatusCodes.INTERNAL_SERVER_ERROR);
-//     }
-// }
+async function getFlight(id){
+    try {
+        const flight=await flightRepository.get(id);
+        return flight;
+    } catch (error) {
+        if(error.statusCode==StatusCodes.NOT_FOUND){
+            throw new AppError('The flight you requested is not present',error.statusCode)
+        }
+        throw new AppError('Cannot fetch data of the flight', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
 
 // async function destroyAirport(id){
 //     try {
@@ -114,7 +114,7 @@ async function getAllFlights(query){
 module.exports={
     createFlight,
     getAllFlights,
-    // getAirport,
+    getFlight
     // destroyAirport,
     // updateAirport
 }

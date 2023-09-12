@@ -55,21 +55,21 @@ async function getAllFlights(req,res){
     }
 }
 
-// /**
-//  * Get: /airports/:id
-//  * req-body {}
-//  */
-// async function getAirport(req,res){
-//     try {
-//         const airport=await AirportService.getAirport(req.params.id);
-//         SuccessResponce.data=airport;
-//         return res.status(StatusCodes.OK).json({SuccessResponce});
-//     } catch (error) {
-//         ErrorResponce.error=error;
-//         console.log(error)
-//         return res.status(error.statusCode).json({ErrorResponce});
-//     }
-// }
+/**
+ * Get: /flights/:id
+ * req-body {}
+ */
+async function getFlight(req,res){
+    try {
+        const flight=await FlightService.getFlight(req.params.id);
+        SuccessResponce.data=flight;
+        return res.status(StatusCodes.OK).json({SuccessResponce});
+    } catch (error) {
+        ErrorResponce.error=error;
+        console.log(error)
+        return res.status(error.statusCode).json({ErrorResponce});
+    }
+}
 
 // /**
 //  * DELETE: /airports/:id
@@ -112,7 +112,7 @@ async function getAllFlights(req,res){
 module.exports={
     createFlight,
     getAllFlights,
-    // getAirport,
+    getFlight,
     // destroyAirport,
     // updateAirport
 }
