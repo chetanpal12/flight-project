@@ -71,6 +71,22 @@ async function getFlight(req,res){
     }
 }
 
+async function updateSeats(req,res){
+    try {
+        const responce=await FlightService.updateSeats({
+            flightId:req.params.id,
+            seats:req.body.seats,
+            dec:req.body.dec
+        });
+        SuccessResponce.data=responce;
+        return res.status(StatusCodes.OK).json({SuccessResponce});
+    } catch (error) {
+        ErrorResponce.error=error;
+        console.log(error)
+        return res.status(error.statusCode).json({ErrorResponce});
+    }
+}
+
 // /**
 //  * DELETE: /airports/:id
 //  * req-body {}
@@ -113,6 +129,7 @@ module.exports={
     createFlight,
     getAllFlights,
     getFlight,
+    updateSeats,
     // destroyAirport,
     // updateAirport
 }
